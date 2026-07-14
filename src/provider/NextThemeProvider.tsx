@@ -1,8 +1,14 @@
+"use client";
+
 import { ThemeProvider, ThemeProviderProps } from "next-themes";
 
-export default async function NextThemeProvider({
+export default function NextThemeProvider({
   children,
   ...props
 }: ThemeProviderProps) {
-  return <ThemeProvider {...props}>{children}</ThemeProvider>;
+  return (
+    <>
+      <ThemeProvider {...props}>{children}</ThemeProvider>
+    </>
+  );
 }

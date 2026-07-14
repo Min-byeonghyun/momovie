@@ -11,10 +11,6 @@ export default function Loading() {
           subtitle="UpComing Movies"
           title="개봉예정 영화"
         />
-        <MovieSectionSkeleton
-          subtitle="Top Rated"
-          title="높은 평점을 받은 영화"
-        />
       </div>
     </div>
   );

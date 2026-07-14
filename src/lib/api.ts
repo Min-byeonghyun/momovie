@@ -7,19 +7,22 @@ const options = {
   },
 };
 
-//영화 정보 불러오기
-
+// 영화 정보 불러오기
 export async function getMoviesData(category: string, page = "1") {
   try {
     const res = await fetch(
-      `${API_URL}/movie/top_rated?language=ko-KR&page=${page}`,
-      { ...options },
+      `${API_URL}/movie/${category}?language=ko-KR&page=${page}`,
+      {
+        ...options,
+      },
     );
+
     if (!res.ok) {
       throw new Error(
-        `TMDB API 요청 실패 상태코드 : ${res.status} ${res.statusText} - ${category}조회`,
+        `TMDB API 요청 실패 (상태 코드 :${res.status} ${res.statusText}) - ${category} 조회`,
       );
     }
+
     return await res.json();
   } catch (e) {
     console.error(e);

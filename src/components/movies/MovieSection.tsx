@@ -7,21 +7,34 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/free-mode";
 import MovieCard from "./MovieCard";
+import { useState } from "react";
 
-export default function MovieSection() {
+interface MovieSectionProps {
+  title: string;
+  subTitle: string;
+  movies: Movie[];
+  moreUrl: string;
+}
+export default function MovieSection({
+  title,
+  subTitle,
+  movies,
+  moreUrl,
+}: MovieSectionProps) {
+  const [ready, setReady] = useState(false);
   return (
     <section className="py-8">
       <div className="flex items-end justify-between mb-6">
         <div>
           <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">
-            Popular Movies
+            {subTitle}
           </p>
           <h2 className="text-xl sm:text-2xl font-bold text-foreground">
-            인기있는 영화
+            {title}
           </h2>
         </div>
         <Link
-          href={"/?category=top_rated"}
+          href={moreUrl}
           className="text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           더보기
@@ -33,6 +46,7 @@ export default function MovieSection() {
         slidesPerView={2}
         navigation
         freeMode
+        onInit={() => setReady(true)}
         breakpoints={{
           640: {
             slidesPerView: 3,
@@ -47,23 +61,13 @@ export default function MovieSection() {
             spaceBetween: 20,
           },
         }}
-        className="movie-swiper"
+        className={`movie-swiper transition-opacity duration-200 ${ready ? "opacity-100" : "opacity-0"}`}
       >
-        <SwiperSlide>
-          <MovieCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <MovieCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <MovieCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <MovieCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <MovieCard />
-        </SwiperSlide>
+        {movies.map((movie) => (
+          <SwiperSlide key={movie.id}>
+            <MovieCard movie={movie} />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </section>
   );

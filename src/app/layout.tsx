@@ -7,7 +7,7 @@ import NextThemeProvider from "@/provider/NextThemeProvider";
 export const metadata: Metadata = {
   title: "Wave - 영화 스트리밍",
   description: "최신 영화와 인기 영화를 찾아보세요",
-  generator: "byeonghyun",
+  generator: "수코딩",
   icons: {
     icon: [
       {
